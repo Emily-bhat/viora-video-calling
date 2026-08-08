@@ -1,0 +1,119 @@
+.landingPageContainer {
+  width: 100vw;
+  height: 100vh;
+  background: url("/public/backgrndimage001.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color:rgb(36, 87, 34);
+
+}
+.navBtn{
+  padding: 8px 18px;
+  border: 1px solid#63b9e7;
+  border-radius: 8px;
+  color: #63b9e7;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+.navBtn:hover {
+  background-color: #63b9e7;
+  color: #fff;
+}
+.callioLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #63b4ff 0%, #0c581f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(45, 130, 110, 0.35);
+}
+
+.callioLogo span {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.navHeader {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 4px;
+}
+.landingPageContainer nav{
+  padding-inline: 2rem;
+  padding-block:1.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+.landingPageContainer nav h2 {
+  font-size:2rem;
+  font-weight: 500;
+  padding-top: 1rem;
+}
+.landingPageContainer nav .navlist{
+  display: flex;
+  gap:1.6rem;
+  
+}
+.landingPageContainer nav .navlist p{
+  font-weight: 500;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding-top: 0.5rem;
+}
+
+
+.landingMainContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.leftImage {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 74vh;
+  width: auto;
+}
+
+
+.rightImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 75vh;
+  width: auto;
+}
+
+
+.center{
+  text-align: center;
+  font-size: 2rem;
+  padding-top: 7rem;
+}
+.center p{
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+
+
+.center-btn {
+  padding: 0.5rem 1rem;
+  display:inline-block;
+  font-size: 1rem;
+  border: 1px solid#63b9e7;
+  border-radius: 1rem;
+  background-color: #63b9e7;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.2s ease;
+  cursor:pointer;
+}

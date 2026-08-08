@@ -1,26 +1,28 @@
-# Backend
-backend/node_modules/
-backend/.env
-
-# Frontend
+# Dependencies
+BACKEND/node_modules/
 frontend/node_modules/
+
+# Environment variables
+BACKEND/.env
 frontend/.env
-# Common
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
+
+# Build output
+frontend/build/
 
 # Logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Build Output
-# ==========================
-frontend/dist/
-frontend/build/
+# Old frontend Git metadata
+frontend/.git_backup/
+
+
+
+
+
+
+
+
+
 
 
 
