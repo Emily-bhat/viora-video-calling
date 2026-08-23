@@ -1,4 +1,7 @@
+import Close from "@mui/icons-material/Close";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Box,
   Typography,
@@ -12,7 +15,7 @@ import {
   Tab,
   Tabs,
 } from "@mui/material";
-import { Visibility, VisibilityOff, Close } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -56,15 +59,64 @@ const theme = createTheme({
 });
 
 export default function Authentication() {
+
+  const navigate = useNavigate();
   const [tab, setTab] = useState(0); // 0 = Sign Up, 1 = Sign In
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const handleChange = (field) => (e) =>
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
+  const handleSubmit = async () => {
+  const url =
+    tab === 0
+      ? "http://localhost:5000/api/v1/users/register"
+      : "http://localhost:5000/api/v1/users/login";
+
+  const body =
+    tab === 0
+      ? {
+          name: form.name,
+          username: form.email,
+          password: form.password,
+        }
+      : {
+          username: form.email,
+          password: form.password,
+        };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.message || "Something went wrong");
+      return;
+    }
+
+    if (tab === 0) {
+      alert("Account created successfully!");
+      setTab(1);
+    } else {
+      localStorage.setItem("token", data.token);
+      alert("Login successful!");
+      navigate("/dashboard");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Unable to connect to the server");
+  }
+};
 
   return (
     <ThemeProvider theme={theme}>
-      
+      <Box
         sx={{
           minHeight: "100vh",
           display: "flex",
@@ -112,7 +164,7 @@ export default function Authentication() {
                   }}
                 >
                   <Typography sx={{ color: "#fff", fontWeight: 800, fontSize: "1rem", lineHeight: 1 }}>
-                    C
+                    V
                   </Typography>
                 </Box>
                 <Typography
@@ -120,7 +172,7 @@ export default function Authentication() {
                   fontWeight={800}
                   sx={{ letterSpacing: "-0.5px", color: "#1a1a2e" }}
                 >
-                  callio
+                  VIORA
                 </Typography>
               </Box>
 
@@ -186,7 +238,7 @@ export default function Authentication() {
                 {tab === 1 && (
                   <Box sx={{ textAlign: "right", mt: -1 }}>
                     <Link href="#" variant="caption" underline="hover" sx={{ color: "#6dd6e9", fontWeight: 600 }}>
-                      Forgot password?
+                      {/* Forgot password? */}
                     </Link>
                   </Box>
                 )}
@@ -195,6 +247,7 @@ export default function Authentication() {
                   variant="contained"
                   fullWidth
                   size="large"
+                  onClick={handleSubmit}
                   sx={{
                     mt: 0.5,
                     background: "linear-gradient(135deg,rgb(0, 81, 0) 0%, #8bd5fa 100%)",
@@ -216,7 +269,7 @@ export default function Authentication() {
                   <Typography variant="caption" color="text.secondary">or</Typography>
                 </Divider>
 
-                <Button
+                {/* <Button
                   variant="outlined"
                   fullWidth
                   size="large"
@@ -238,7 +291,7 @@ export default function Authentication() {
                   }}
                 >
                   Continue with Google
-                </Button>
+                </Button> */}
               </Box>
             </Box>
 
@@ -267,7 +320,7 @@ export default function Authentication() {
             <Box
               component="img"
               src="/authenticationimg.avif"
-              alt="callio workspace"
+              alt="VIORA workspace"
               sx={{
                 width: "100%",
                 height: "100%",

@@ -1,6 +1,8 @@
  import httpStatus from "http-status";
  import { User } from "../models/user.models.js";
  import bcrypt, { hash } from "bcrypt";
+ import crypto from "node:crypto";
+ import jwt from "jsonwebtoken";
 
 
  const login = async (req, res) => {
@@ -10,25 +12,57 @@
         return res.status(400).json({message: "Please provide"})
     }
     try{
-        const user =  await User.find({username});
-        if(!user){
-            return res.status(httpStatus.NOT_FOUND).json({message: "User Not Found"})
+        const user = await User.findOne({ username }).select("+password");
+        if (!user) {
+            return res.status(401).json({
+                message: "Invalid username or password"
+            });
         }
-        if(bcrypt.compare(password, user.password)) {
-            let token = crypto.randomBytes(20).toString("hex");
+        const passwordMatch = await bcrypt.compare(
+            password,
+            user.password
+        );
 
-            user.token = token;
-            await user.save();
-            return res.status(httpStatus.OK).json({ token: token })
+        if (!passwordMatch) {
+            return res.status(401).json({
+            message: "Invalid username or password"
+            });
         }
-    }catch (e) {
-        return res.status(500).json({message: `something went wrong ${e}`});
-    }
+
+        const token = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        return res.status(httpStatus.OK).json({
+            token: token
+        });
+
+    } catch (e) {
+    console.error("Login error:", e);
+
+    return res.status(500).json({
+        message: "Something went wrong"
+    });
+}
  }
 
 
  const register = async (req, res)=> {
     const { name, username, password } = req.body;
+
+    if (!name || !username || !password) {
+        return res.status(400).json({
+            message: "Name, username and password are required"
+        });
+    }
+
+    if (password.length < 8) {
+        return res.status(400).json({
+            message: "Password must be at least 8 characters"
+        });
+    }
 
     try{
         const existingUser = await User.findOne({ username });
@@ -51,4 +85,57 @@
 }
  }
 
- export { login, register }
+//  const forgotPassword = async (req, res) => {
+//     const { email } = req.body;
+
+//     if (!email) {
+//         return res.status(400).json({
+//             message: "Email is required"
+//         });
+//     }
+
+//     try {
+//         const user = await User.findOne({
+//             email: email.toLowerCase().trim()
+//         });
+
+//         // Don't reveal whether an account exists
+//         if (!user) {
+//             return res.status(200).json({
+//                 message: "If an account exists, a reset link has been sent."
+//             });
+//         }
+
+//         const resetToken = crypto.randomBytes(32).toString("hex");
+
+//         user.resetPasswordToken = crypto
+//             .createHash("sha256")
+//             .update(resetToken)
+//             .digest("hex");
+
+//         user.resetPasswordExpires =
+//             Date.now() + 15 * 60 * 1000;
+
+//         await user.save();
+
+//         console.log("PASSWORD RESET TOKEN:", resetToken);
+
+//         return res.status(200).json({
+//             message: "If an account exists, a reset link has been sent."
+//         });
+
+//     } catch (error) {
+//         console.error("Forgot password error:", error);
+
+//         return res.status(500).json({
+//             message: "Something went wrong"
+//         });
+//     }
+//     };
+
+
+export {
+    login,
+    register
+    
+};

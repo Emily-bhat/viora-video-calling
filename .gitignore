@@ -5,6 +5,8 @@ frontend/node_modules/
 # Environment variables
 BACKEND/.env
 frontend/.env
+.env
+.env.*
 
 # Build output
 frontend/build/

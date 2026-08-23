@@ -6,17 +6,17 @@ export default function LandingPage(){
         <div className='landingPageContainer'> 
         <nav>
             <div className ='navHeader'>
-                <div className='callioLogo'>
-                    <span>C</span>
+                <div className='vioraLogo'>
+                    <span>V</span>
                 </div>
-                <h2>CALLIO</h2>
+                <h2>VIORA</h2>
             </div>
             <div className ='navlist'>
-                <p>Join as Guest</p>
-                <p>Register</p>
-                <div role='button'>
-                    <p className='navBtn'>Login</p>
-                </div>
+                <Link to="/guest" className="guest-btn">
+                    Join as Guest
+                </Link>
+                
+                
 
             </div>
         </nav>
