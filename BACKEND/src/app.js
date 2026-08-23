@@ -17,6 +17,9 @@ import userRoutes from "./routes/users.routes.js"
 dns.setServers(["8.8.8.8"]);
 
 const app = express();
+app.get("/healthz", (req, res) => {
+    res.status(200).json({ status: "OK" });
+});
 app.use(helmet());
 const server = createServer(app);
 const io = ConnectToSocket(server);
