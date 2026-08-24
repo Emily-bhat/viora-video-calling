@@ -20,6 +20,8 @@ const app = express();
 app.get("/healthz", (req, res) => {
     res.status(200).json({ status: "OK" });
 });
+
+
 app.use(helmet());
 const server = createServer(app);
 const io = ConnectToSocket(server);
