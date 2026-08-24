@@ -69,8 +69,8 @@ export default function Authentication() {
   const handleSubmit = async () => {
   const url =
     tab === 0
-      ? "http://localhost:5000/api/v1/users/register"
-      : "http://localhost:5000/api/v1/users/login";
+      ? "https://viora-backend-g4i0.onrender.com/api/v1/users/register"
+      : "https://viora-backend-g4i0.onrender.com/api/v1/users/login";
 
   const body =
     tab === 0

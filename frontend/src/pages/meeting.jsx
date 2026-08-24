@@ -102,7 +102,7 @@ export default function Meeting() {
             const token = localStorage.getItem("token");
             const guestName = sessionStorage.getItem("guestName");
 
-            socketRef.current = io("http://localhost:5000", {
+            socketRef.current = io("https://viora-backend-g4i0.onrender.com", {
                 auth: {
                     token: token || null,
                     guestName: guestName || null
