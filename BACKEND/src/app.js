@@ -31,7 +31,13 @@ app.set("port", (process.env.PORT || 8000))
 // app.get("/home",(req, res) => {
 //     return res.json({"Hello":"World"});
 // });
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:3000",
+        "https://viora-frontend-mtilv9ssi-eb-2e7b.vercel.app"
+    ],
+    credentials: true
+}));
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
