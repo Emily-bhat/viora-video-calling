@@ -1,8 +1,8 @@
-# Callio – Peer-to-Peer Video Calling Platform
+# Viora – Peer-to-Peer Video Calling Platform
 
 ## Overview
 
-Callio is a full-stack peer-to-peer video calling application that I built to explore real-time communication using WebRTC. The application allows users to connect through video and audio calls while using Socket.IO as the signaling server to establish direct peer-to-peer connections. It also includes user authentication and real-time messaging for a complete communication experience.
+Viora is a full-stack peer-to-peer video calling application that I built to explore real-time communication using WebRTC. The application allows users to connect through video and audio calls while using Socket.IO as the signaling server to establish direct peer-to-peer connections. It also includes user authentication and real-time messaging for a complete communication experience.
 
 This project helped me understand how WebRTC works behind the scenes, including signaling, SDP exchange, ICE candidate negotiation, and socket-based communication.
 
@@ -110,7 +110,7 @@ While building this project, I gained practical experience with:
 
 ## Author
 
-**Your Name**
+**Emily Bhattacharjee**
 
 B.Tech in Computer Science Engineering
 
